@@ -1,0 +1,25 @@
+{
+    "name": "nabbio/laravel-traits",
+    "description": "traits for models in laravel",
+    "type": "library",
+    "homepage": "https://github.com/nabbio/laravel-traits",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Ever Hernandez",
+            "email": "everhdezz@gmail.com"
+        }
+    ],
+    "require": {
+        "php" : ">=7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nabbio\\": "src/"
+        }
+    }
+}
