@@ -15,8 +15,8 @@ trait HasFullTextSearch
         $words = explode(' ', str_replace($this->reserved_symbols, '', $term));
 
         return collect($words)
-                ->filter(fn($item) => strlen($item) > 3 )
-                    ->map(fn($item) => '+' . $item . '*' )
+                ->filter(function($item){ return strlen($item) > 3; })
+                    ->map(function($item){ return '+' . $item . '*'; })
                         ->join(' ');
     }
 
