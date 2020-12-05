@@ -7,6 +7,12 @@ trait HasFullTextSearch
     protected $model_property_aux = 'searchable';
     protected $reserved_symbols = ['-', '+', '<', '>', '@', '(', ')', '~'];
 
+    function scopeOrderByScore($query, $term){
+        return $query
+                ->selectRaw("(MATCH ({$this->getSearchableColumns()}) AGAINST (?)) as score", [$this->fullTextWildcards($term)])
+                ->orderByDesc('score');
+    }
+
     function scopeFullTextSearch($query, $term){
         return $query->whereRaw($this->getFullTextSqlCode(), $this->fullTextWildcards($term));
     }
