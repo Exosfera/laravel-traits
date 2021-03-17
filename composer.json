@@ -1,8 +1,8 @@
 {
-    "name": "nabbio/laravel-traits",
+    "name": "exosfera/laravel-traits",
     "description": "traits for models in laravel",
     "type": "library",
-    "homepage": "https://github.com/nabbio/laravel-traits",
+    "homepage": "https://github.com/exosfera/laravel-traits",
     "license": "MIT",
     "version": "1.0.0",
     "authors": [
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nabbio\\": "src/"
+            "Exosfera\\": "src/"
         }
     }
 }

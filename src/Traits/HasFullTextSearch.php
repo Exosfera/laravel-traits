@@ -1,6 +1,6 @@
 <?php
 
-namespace Nabbio\Traits;
+namespace Exosfera\Traits;
 
 trait HasFullTextSearch
 {
