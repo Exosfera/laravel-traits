@@ -9,7 +9,7 @@ trait HasFullTextSearch
 
     function scopeOrderByScore($query, $term){
         return $query
-                ->selectRaw("(MATCH ({$this->getSearchableColumns()}) AGAINST (?)) as score", [$this->fullTextWildcards($term)])
+                ->selectRaw("(MATCH ({$this->getSearchableColumns()}) AGAINST (?)) + IF({$this->getColumnsBeginingWith($term)}, 100, 0) as score", [$this->fullTextWildcards($term)])
                 ->orderByDesc('score');
     }
 
@@ -30,7 +30,16 @@ trait HasFullTextSearch
         if (!property_exists(self::class, $this->model_property_aux))
             throw new \Exception("$this->model_property_aux property is required", 1);
             
-        return implode(',', $this->{$this->model_property_aux});
+        return collect($this->{$this->model_property_aux})->join(',');
+    }
+
+    protected function getColumnsBeginingWith($term){
+        if (!property_exists(self::class, $this->model_property_aux))
+            throw new \Exception("$this->model_property_aux property is required", 1);
+            
+        return collect($this->{$this->model_property_aux})->map(function($column) use ($term){
+            return "{$column} LIKE '{$term}%'";
+        })->join(' OR ');
     }
 
     protected function getFullTextSqlCode(){
